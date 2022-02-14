@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aahil's Private Speech Assistant</title>
+    <style>
+        body 
+{
+background-image: url(https://png.pngtree.com/thumb_back/fh260/back_our/20190621/ourmid/pngtree-c4d-neon-cool-background-image_205279.jpg);
+}
+        h1 {color: crimson;}
+        .talk{background-color: cyan;
+                border-radius: 0px;}
+        .content{color: cyan;}
+     </style>
+  </head>
+  
+<body>
+    <h1> Hi ! I Am Aahil's Assistent </h1>
+  
+    <h3 class="content"></h3>
+    <script       type="application/javascript">
+          function start(){
+                var r = document.getElementById("result");
+            if("webkitSpeechRecognition" in window){
+                var speechRecognizer = new webkitSpeechRecognition();
+                speechRecognizer.continuous = true;
+                speechRecognizer.interimResults = true;
+                speechRecognizer.lang = "EN-UK";
+                speechRecognizer.start();
+              const content = document.querySelector('.content');
+        speechRecognizer.onstart = function(){
+            console.log('Hello Aahil sir, I am your private assistant')
+        }
+        speechRecognizer.onresult = function (event) {
+            const current = event.resultIndex;
+
+            const transcript = event.results[current][0].transcript;
+            content.textContent = transcript;
+            readOutLoud(transcript);
+console.log(transcript)
+        };
+
+        
+
+        function readOutLoud(message){
+            const speech = new SpeechSynthesisUtterance();
+
+          if(message.includes(`hey Jarvis`)){
+                speech.text = 'hello Aahil sir, how may i help you'; 
+          }
+            if(message.includes(`videos`)){
+                speech.text = 'Ok give me 2 seconds Aahil'; 
+                window.open('https://www.youtube.com/')
+                }
+          if(message.includes(`WhatsApp`)){
+                speech.text = 'Opening Whatsapp Sir'; 
+                window.open(`https://web.whatsapp.com/`)
+                }
+          if(message.includes(`GitHub`)){
+                speech.text = 'Opening Github sir'; 
+                window.open(`https://www.google.com/`)
+                }
+          if(message.includes('weather'|| 'Weather')){
+                speech.text = 'Checking Weather Sir'; 
+                window.open(`https://www.google.com/search?q=weather`)
+                }
+          if(message.includes(`Google`)){
+                speech.text = 'Searching On Google Sir'; 
+                window.open(`https://www.google.com/search?q=${content.textContent.substr(content.textContent.indexOf(" ") + 1)}`)
+                }
+          if(message.includes(`open Google`)){
+                speech.text = 'opening google sir'; 
+                window.open(`https://www.google.com/`)
+                }
+           if(message.includes(`killer`)){
+                speech.text = 'hello killer sir you are opee'; 
+                window.open(`https://media3.giphy.com/media/3o6Zt5ACOjncVOHjPO/giphy.gif`)
+                }
+            if(message.includes(`join Marathi period`)){
+                speech.text = 'Ok give me 2 seconds Aahil'; 
+                window.open(`https://www.google.com/`)
+                }
+        
+
+            speech.volume = 8;
+            speech.rate = 1.1;
+            speech.pitch = 1;
+
+            window.speechSynthesis.speak(speech);
+        }
+            }
+          }
+    </script>
+ 
+  <div id="talk"></div>
+  <button onclick="start()"><img src="https://qph.fs.quoracdn.net/main-qimg-1a60e5287a32a3a8cb91d06ef3313eed"></button>
+</body>
+</html>
